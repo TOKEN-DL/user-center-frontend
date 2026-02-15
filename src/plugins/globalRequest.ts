@@ -36,12 +36,15 @@ request.interceptors.request.use((url,options): any => {
  */
 request.interceptors.response.use(async (response, options): Promise<any> => {
   const res = await response.clone().json()
+  // 如果正确
   if (res.code === 0) {
     return res.data;
   }
+  //如果用户未登录
   if (res.status === 40100) {
 
-    message.error(res.description);
+    //报错并且重定向到登录页
+    message.error('请先登录');
 
     history.replace({
       pathname: '/user/login',
@@ -50,6 +53,7 @@ request.interceptors.response.use(async (response, options): Promise<any> => {
       }),
     });
   } else {
+    // 如果登录了就返回其他的主要的错误信息
     message.error(res.description);
   }
     return res.data;

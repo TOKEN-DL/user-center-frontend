@@ -1,17 +1,17 @@
 import { Footer } from '@/components';
 import { login } from '@/services/ant-design-pro/api';
-import { getFakeCaptcha } from '@/services/ant-design-pro/login';
+
 import {
   AlipayCircleOutlined,
   LockOutlined,
-  MobileOutlined,
+
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
 import {
   LoginForm,
-  ProFormCaptcha,
+
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
@@ -118,13 +118,15 @@ const Login: React.FC = () => {
         window.location.href = urlParams.get('redirect') || '/';
         return;
       }
-
       // 如果失败去设置用户错误信息
-      setUserLoginState(user);
-    } catch (error) {
+      // setUserLoginState(user);
+    }
+    catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
       console.log(error);
       message.error(defaultLoginFailureMessage);
+
+
     }
   };
   const { status, type: loginType } = userLoginState;
@@ -149,12 +151,12 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           logo={<img alt="logo" src={SYSTEM_LOG} />}
-          title="时雨快乐屋用户中心"
-          subTitle={'Ant Design 是西湖区最具影响力的 Web 设计规范'}
+          title="CDL用户中心"
+          subTitle={''}
           initialValues={{
             autoLogin: true,
           }}
-          actions={['其他登录方式 :', <ActionIcons key="icons" />]}
+
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
           }}
